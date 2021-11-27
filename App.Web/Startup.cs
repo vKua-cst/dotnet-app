@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System;
 using App.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace App.Web
 {
@@ -34,9 +35,9 @@ namespace App.Web
 
             services.AddHttpContextAccessor();
 
-            services.AddAuthentication("cookie")
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(
-                    "cookie", builder =>
+                    CookieAuthenticationDefaults.AuthenticationScheme, builder =>
                     {
                         builder.LoginPath = "/auth/connect";
                         builder.LogoutPath = "/auth/disconnect";

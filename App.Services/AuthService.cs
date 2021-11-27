@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace App.Services
 {
@@ -31,11 +32,11 @@ namespace App.Services
                     new Claim("FullName", "Tarik Ouali")
                 };
 
-                ClaimsIdentity identity = new ClaimsIdentity(claims);
+                ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 ClaimsPrincipal principal = new ClaimsPrincipal(identity);
 
                 await _httpContext.SignInAsync(
-                    "cookie",
+                    CookieAuthenticationDefaults.AuthenticationScheme,
                     principal
                 );
 
