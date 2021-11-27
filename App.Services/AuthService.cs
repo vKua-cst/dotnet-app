@@ -23,17 +23,17 @@ namespace App.Services
             if (model == null)
                 return false;
 
-            if(model.Login == "Tarik" && model.Password == "pass")
+            if(model.Login == "Chris" && model.Password == "pass")
             {
                 var claims = new List<Claim>()
                 {
-                    new Claim("Name", "Tarik"),
+                    new Claim("Name", "Chris"),
                     new Claim("Role", "Dev"),
-                    new Claim("FullName", "Tarik Ouali")
+                    new Claim("FullName", "Chris Creusat")
                 };
 
-                ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+                ClaimsIdentity identity = new(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                ClaimsPrincipal principal = new(identity);
 
                 await _httpContext.SignInAsync(
                     CookieAuthenticationDefaults.AuthenticationScheme,
@@ -46,9 +46,9 @@ namespace App.Services
             return false;
         }
 
-        public Task LogOut()
+        public async Task LogOutAsync()
         {
-            throw new NotImplementedException();
+            await _httpContext.SignOutAsync();
         }
     }
 }

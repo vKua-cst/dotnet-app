@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using App.Services;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace App.Web.Controllers
 {
@@ -38,9 +38,12 @@ namespace App.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Disconnect()
+        [Authorize]
+        public async Task<IActionResult> Disconnect()
         {
-            return View();
+            await _authService.LogOutAsync();
+
+            return Redirect("/");
         }
     }
 }
