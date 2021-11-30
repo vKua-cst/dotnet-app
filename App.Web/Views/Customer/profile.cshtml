@@ -1,0 +1,4 @@
+﻿@if (!String.IsNullOrEmpty(User.FindFirst("Name").Value))
+{
+    <h1>Bonjour, @User.FindFirst("Name").Value</h1>
+}
